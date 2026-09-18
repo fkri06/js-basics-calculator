@@ -2,6 +2,8 @@ const numberButtons = document.querySelectorAll(".numbers");
 const operatorButtons = document.querySelectorAll(".operator");
 const inputElement = document.querySelector(".input"); // the input.value stores string data type
 const equals = document.querySelector(".equals");
+const clearBtn = document.querySelector(".clear");
+const deleteBtn = document.querySelector(".delete");
 
 let firstNumber = "";
 let secondNumber = "";
@@ -89,4 +91,32 @@ equals.addEventListener("click", () => {
    inputElement.value = firstNumber;
    secondNumber = "";
    mathOperator = "";
+});
+
+clearBtn.addEventListener("click", () => {
+    firstNumber = "";
+    secondNumber = "";
+    mathOperator = "";
+    inputElement.value = "";
+});
+
+deleteBtn.addEventListener("click", () => {
+    let deletedValues = inputElement.value;
+    deletedValues = deletedValues.slice(0, deletedValues.length - 1);
+
+    if (mathOperator === inputElement.value) {
+        mathOperator = "";
+        inputElement.value = deletedValues;
+        return;
+    }
+
+    if (firstNumber && secondNumber === "") {
+        firstNumber = deletedValues;
+    } 
+
+    if (secondNumber !== "") {
+        secondNumber = deletedValues;
+    }
+
+    inputElement.value = deletedValues;
 });
